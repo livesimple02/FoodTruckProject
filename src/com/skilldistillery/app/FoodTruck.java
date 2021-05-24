@@ -18,7 +18,7 @@ public class FoodTruck {
 		nextId++ ;
 	}
 	
-	
+	// Replacement of toString method
 	public String toString () {
 		String result = "Truck ID: " + getId();
 		result += " | Name: " + getName();
@@ -45,8 +45,4 @@ public class FoodTruck {
 	}
 	
 	
-	
-	
-	
-	
-}
+} // end of class

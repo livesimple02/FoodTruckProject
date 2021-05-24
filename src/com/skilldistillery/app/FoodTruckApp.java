@@ -8,12 +8,15 @@ public class FoodTruckApp {
 	
 	public static void main(String[] args) {
 
+		// Set loop variable and instantiate FoodTruckApp object
 		boolean keepGoing = true;
 		FoodTruckApp app = new FoodTruckApp();
 		
+		// Print welcome message and get entries from user
 		app.printWelcomeMessage();
 		FoodTruck[] trucks = app.getTruckEntriesFromUser();
 		
+		// Loop the menu until user chooses to quit
 		while (keepGoing) {
 			app.printMenu();
 			String userResponse = app.getAndCheckUserResponse();
@@ -32,7 +35,7 @@ public class FoodTruckApp {
 			 }
 		}
 		
-	}
+	}  // end of main
 
 	
 	private void printWelcomeMessage() {
@@ -47,11 +50,16 @@ public class FoodTruckApp {
 	}
 	
 	private FoodTruck[] getTruckEntriesFromUser() {
+		
+		// Initialize three arrays to handle truck names, food types, and ratings
 		String[] truckNames = new String[5];
 		String[] foodTypes = new String[5];
 		int[] ratings = new int[5];
-		int numOfTrucks = 0;
+		int numOfTrucks = 0; // number of trucks entered by user
 		
+		// Get truck name from user for up to 5 trucks. If user types "quit",
+		// truck entries stop and program proceeds to menu. If a truck name is
+		// entered, get food type and rating from user.
 		for (int truckNum = 1;numOfTrucks < 5; numOfTrucks++, truckNum++) {
 			truckNames[numOfTrucks] = getTruckNameFromUser(truckNum);
 			if (truckNames[numOfTrucks].equalsIgnoreCase("quit")) {
@@ -63,14 +71,20 @@ public class FoodTruckApp {
 			input.nextLine();
 		}
 		
+		// Initialize the final food truck array based on the actual number
+		// of truck entries.
 		FoodTruck[] trucks = new FoodTruck[numOfTrucks];
 		
+		// Build the final food truck array using the three arrays built from
+		// the data entered by the user
 		for (int i = 0; i < trucks.length; i++) {
 			trucks[i] = new FoodTruck(truckNames[i], foodTypes[i], ratings[i]);		
 		}
 		
+		// return final array that is now at correct length
 		return trucks;
-	}
+		
+	} // end of getTruckEntriesFromUser method
 	
 	
 	private void printMenu() {
@@ -89,19 +103,14 @@ public class FoodTruckApp {
 		String userResponse = "";
 		while (validResponse == false) {
 			userResponse = input.nextLine();
-			if (userResponse.equalsIgnoreCase("1")) {
+			switch (userResponse) {
+			case "1":
+			case "2":
+			case "3":
+			case "4":
 				validResponse = true;
-			}
-			else if (userResponse.equalsIgnoreCase("2") ) {
-				validResponse = true;
-			}
-			else if (userResponse.equalsIgnoreCase("3")) {
-				validResponse = true;
-			}
-			else if (userResponse.equalsIgnoreCase("4")) {
-				validResponse = true;
-			}
-			else {
+				break;
+			default:
 				System.err.println("Invalid Entry. Please try again.");
 			}
 		}
@@ -161,9 +170,4 @@ public class FoodTruckApp {
 	
 	
 	
-	
-	
-	
-	
-	
-}
+} // end of class
